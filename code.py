@@ -1,0 +1,43 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# 1. Create dataset
+data = {
+    "Experience": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "Salary": [30000, 35000, 40000, 45000, 50000,
+               55000, 60000, 65000, 70000, 75000]
+}
+
+df = pd.DataFrame(data)
+
+# 2. Separate input (X) and output (Y)
+X = df[["Experience"]]
+Y = df["Salary"]
+
+# 3. Create Linear Regression model
+model = LinearRegression()
+
+# 4. Train the model
+model.fit(X, Y)
+
+# 5. Predict salary for 5 years experience
+
+experience = [[52]]
+predicted_salary = model.predict(experience)
+
+print("Predicted Salary:", predicted_salary[0])
+
+# 6. Check model values
+print("Coefficient:", model.coef_[0])
+print("Intercept:", model.intercept_)
+
+# 7. Visualize the data and regression line
+plt.scatter(X, Y, color="blue")
+plt.plot(X, model.predict(X), color="red")
+
+plt.xlabel("Years of Experience")
+plt.ylabel("Salary")
+plt.title("Salary Prediction using Linear Regression")
+
+plt.show()
